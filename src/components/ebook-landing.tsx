@@ -15,14 +15,7 @@ export default function EbookLanding() {
   }
 
   return (
-    <div
-    style={{
-      backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url("/real-state-modern.jpg")',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat'
-    }}
-    className="min-h-screen bg-gradient-to-b from-zinc-900 to-zinc-800">
+    <div className="min-h-screen bg-gradient-to-b from-zinc-900 to-zinc-800">
       <div className="container mx-auto px-4 py-16">
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-12 items-center">
           <div className="space-y-6">
