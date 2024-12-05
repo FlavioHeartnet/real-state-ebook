@@ -12,9 +12,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import sendData from "./api/usecase/storeData";
+import sendEmail from "./api/usecase/sendMail";
+import ErrorMessage from "@/components/error-message";
 
 export default function EbookLanding() {
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -23,8 +26,13 @@ export default function EbookLanding() {
     const email = e.target.elements.email.value;
     const phone = e.target.elements.phone.value;
     const resp = await sendData(name, email, phone);
-    console.log(resp);
-    setSubmitted(true);
+    if(resp.length > 0){
+      await sendEmail(email, name);
+      setSubmitted(true);
+    }else{
+      setError(true)
+    }
+    
   };
 
   return (
@@ -73,8 +81,7 @@ export default function EbookLanding() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                {!submitted
-                  ? (
+              {!submitted && !error ? (
                     <form onSubmit={handleSubmit} className="space-y-4">
                       <div className="space-y-2">
                         <div className="relative">
@@ -119,8 +126,9 @@ export default function EbookLanding() {
                         Quero Receber o E-book
                       </Button>
                     </form>
-                  )
-                  : (
+                 ) : error ? (
+                  <ErrorMessage />
+                ) : (
                     <div className="text-center space-y-4 py-6">
                       <Building className="w-12 h-12 mx-auto text-[#99CC33]" />
                       <h3 className="text-xl font-semibold">
