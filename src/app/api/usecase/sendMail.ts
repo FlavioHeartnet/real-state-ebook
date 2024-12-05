@@ -5,7 +5,7 @@ const mailerSend = new MailerSend({
     apiKey: process.env.NEXT_PUBLIC_MAILERSEND_KEY || '',
 });
 export default async function sendEmail(email: string, name: string){
-    const sentFrom = new Sender("noblerealstate@noblespace.pro", "Marcelo Pain");
+    const sentFrom = new Sender("noblerealstate@noblespace.pro", "Marcelo Paim");
     const recipients = [
         new Recipient(email, name)
     ];
@@ -33,7 +33,7 @@ export default async function sendEmail(email: string, name: string){
     <p>Boa leitura e sucesso em suas vendas!</p>
     
     <p>Atenciosamente,<br>
-    Marcelo Pain</p>`
+    Marcelo Paim</p>`
     const emailParams = new EmailParams()
     .setFrom(sentFrom)
     .setTo(recipients)
