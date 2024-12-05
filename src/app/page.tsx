@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import { Building, Mail, Phone, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -26,13 +26,12 @@ export default function EbookLanding() {
     const email = e.target.elements.email.value;
     const phone = e.target.elements.phone.value;
     const resp = await sendData(name, email, phone);
-    if(resp.length > 0){
+    if (resp.length > 0) {
       await sendEmail(email, name);
       setSubmitted(true);
-    }else{
-      setError(true)
+    } else {
+      setError(true);
     }
-    
   };
 
   return (
@@ -81,7 +80,8 @@ export default function EbookLanding() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-              {!submitted && !error ? (
+                {!submitted && !error
+                  ? (
                     <form onSubmit={handleSubmit} className="space-y-4">
                       <div className="space-y-2">
                         <div className="relative">
@@ -126,9 +126,10 @@ export default function EbookLanding() {
                         Quero Receber o E-book
                       </Button>
                     </form>
-                 ) : error ? (
-                  <ErrorMessage />
-                ) : (
+                  )
+                  : error
+                  ? <ErrorMessage />
+                  : (
                     <div className="text-center space-y-4 py-6">
                       <Building className="w-12 h-12 mx-auto text-[#99CC33]" />
                       <h3 className="text-xl font-semibold">

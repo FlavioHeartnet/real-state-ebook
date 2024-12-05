@@ -1,16 +1,16 @@
-'use server';
-import { MailerSend, EmailParams, Sender, Recipient } from "mailersend";
+"use server";
+import { EmailParams, MailerSend, Recipient, Sender } from "mailersend";
 
 const mailerSend = new MailerSend({
-    apiKey: process.env.NEXT_PUBLIC_MAILERSEND_KEY || '',
+  apiKey: process.env.NEXT_PUBLIC_MAILERSEND_KEY || "",
 });
-export default async function sendEmail(email: string, name: string){
-    const sentFrom = new Sender("noblerealstate@noblespace.pro", "Marcelo Paim");
-    const recipients = [
-        new Recipient(email, name)
-    ];
-    
-    const emailData:string =  `
+export default async function sendEmail(email: string, name: string) {
+  const sentFrom = new Sender("noblerealstate@noblespace.pro", "Marcelo Paim");
+  const recipients = [
+    new Recipient(email, name),
+  ];
+
+  const emailData: string = `
     <h1>Olá ${name},</h1>
 
     <p>Estou feliz em compartilhar que seu e-book "Estratégias Infalíveis para Vender Imóveis" está pronto para download!</p>
@@ -33,16 +33,18 @@ export default async function sendEmail(email: string, name: string){
     <p>Boa leitura e sucesso em suas vendas!</p>
     
     <p>Atenciosamente,<br>
-    Marcelo Paim</p>`
-    const emailParams = new EmailParams()
+    Marcelo Paim</p>`;
+  const emailParams = new EmailParams()
     .setFrom(sentFrom)
     .setTo(recipients)
-    .setSubject("Seu E-book Gratuito - Estratégias Infalíveis para Vender Imóveis")
-    .setHtml(emailData)
-    try {
-        const response = await mailerSend.email.send(emailParams);
-        console.log('Email sent successfully:', response.statusCode);
-      } catch (error) {
-        console.error('Error sending email:', error);
-      }
+    .setSubject(
+      "Seu E-book Gratuito - Estratégias Infalíveis para Vender Imóveis",
+    )
+    .setHtml(emailData);
+  try {
+    const response = await mailerSend.email.send(emailParams);
+    console.log("Email sent successfully:", response.statusCode);
+  } catch (error) {
+    console.error("Error sending email:", error);
+  }
 }
