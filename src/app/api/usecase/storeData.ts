@@ -14,19 +14,7 @@ export default async function sendData(
   email: string,
   phone: number,
 ): Promise<createResponse[]> {
-  const options = {
-    method: "POST",
-    url: "https://nocodb.noblespace.pro/api/v2/tables/m9zk3yvnsdpv51n/records",
-    headers: {
-      "xc-token": "ughLyNRN5dQOoSQYWu_zXDfsc3kZ6ENOIAtYl9jL",
-      "Content-Type": "application/json",
-    },
-    body: [{
-      name: name,
-      email: email,
-      phone: phone,
-    }],
-  };
+
   const records: Record[] = [
     {
       name: name,
@@ -36,7 +24,7 @@ export default async function sendData(
   ];
   const response = await axios.post('https://nocodb.noblespace.pro/api/v2/tables/m9zk3yvnsdpv51n/records', records, {
     headers: {
-      'xc-token': 'ughLyNRN5dQOoSQYWu_zXDfsc3kZ6ENOIAtYl9jL',
+      'xc-token': process.env.NEXT_PUBLIC_NOCODBKEY,
       'Content-Type': 'application/json',
     },
   })
